@@ -26,7 +26,7 @@ export default function App() {
         setCheckAnswers(false);
         setQuizResults('');
 
-        fetch(`https://opentdb.com/api.php?amount=5${categoryValue ? '&category=' + categoryValue : ''}`)
+        fetch(`https://opentdb.com/api.php?amount=5${categoryValue = 1 ? '' : '&category=' + categoryValue}`)
             .then(res => res.json())
             .then(data => {
                 const newQuestionArr = data.results.map(item => {
@@ -194,28 +194,30 @@ export default function App() {
             <img 
                 src="./images/blob-2.png"
                 className="img-blob-2"></img>
-            {
-                quizStarted ? 
-                    <Questions questionHtml={questions}/> : 
-                    <IntroPg 
-                        dropDownHtml={dropDownHtml()}
-                        onClick={handleStartBtn}
-                    />
-            }
-            <div className="score-container">
-                {checkAnswers ?
-                    <p className="score">You scored {quizResults}/5 correct answers</p> : ''}
+            <div className="content-container">
                 {
                     quizStarted ? 
-                        <button 
-                            className='btn-submit'
-                            style={{width: checkAnswers ? '125px' : '200px'}}
-                            onClick={checkAnswers ? newQuiz : handleCheckAnswers}
-                        >
-                            {checkAnswers ? 'Play Again' : 'Check Answers'}
-                        </button> :
-                        ''
+                        <Questions questionHtml={questions}/> : 
+                        <IntroPg 
+                            dropDownHtml={dropDownHtml()}
+                            onClick={handleStartBtn}
+                        />
                 }
+                <div className="score-container">
+                    {checkAnswers ?
+                        <p className="score">You scored {quizResults}/5 correct answers</p> : ''}
+                    {
+                        quizStarted ? 
+                            <button 
+                                className='btn-submit'
+                                style={{width: checkAnswers ? '125px' : '200px'}}
+                                onClick={checkAnswers ? newQuiz : handleCheckAnswers}
+                            >
+                                {checkAnswers ? 'Play Again' : 'Check Answers'}
+                            </button> :
+                            ''
+                    }
+                </div>
             </div>
         </main>
     )
