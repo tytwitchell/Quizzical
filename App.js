@@ -4,6 +4,7 @@ import Questions from './components/Questions'
 import { nanoid } from 'nanoid'
 import { decode } from 'html-entities'
 import CategoriesArr from './components/Categories';
+import ReactConfetti from './components/Confetti';
 
 
 export default function App() {
@@ -188,6 +189,7 @@ export default function App() {
 
     return (
         <main>
+            {quizResults > 3 && <ReactConfetti />}
             <img 
                 src="./images/blob-1.png"
                 className="img-blob-1"></img>
