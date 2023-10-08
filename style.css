@@ -58,7 +58,8 @@ main {
     border: none;
     outline: none;
     font-size: .8em;
-    padding: 5px;
+    padding: .5em 1em;
+
     border-radius: 5px;
     background-color:#DBDEF0;
     cursor: pointer;
@@ -77,6 +78,7 @@ main {
     color: #F5F7FB;
     font-family: inherit;
     font-weight: 500;
+    font-size: .75em;
     padding: 1em 3.5em;
     margin-top: 2em;
     cursor: pointer

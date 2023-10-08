@@ -459,7 +459,7 @@ function App() {
         setCheckAnswers(false);
         setQuizResults('');
 
-        fetch('https://opentdb.com/api.php?amount=5' + (categoryValue = 1 ? '' : '&category=' + categoryValue)).then(function (res) {
+        fetch('https://opentdb.com/api.php?amount=5' + (categoryValue ? '&category=' + categoryValue : '')).then(function (res) {
             return res.json();
         }).then(function (data) {
             var newQuestionArr = data.results.map(function (item) {
@@ -498,11 +498,6 @@ function App() {
         return _react2.default.createElement(
             'div',
             { className: 'option-container' },
-            _react2.default.createElement(
-                'label',
-                { 'for': 'select-category' },
-                'Category:'
-            ),
             _react2.default.createElement(
                 'select',
                 {
@@ -735,7 +730,7 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var CategoriesArr = [{ value: 1, label: 'All Categories' }, { value: 9, label: 'General Knowledge' }, { value: 10, label: 'Books' }, { value: 11, label: 'Film' }, { value: 12, label: 'Music' }, { value: 13, label: 'Musicals & Theaters' }, { value: 14, label: 'Television' }, { value: 15, label: 'Video Games' }, { value: 16, label: 'Board Games' }, { value: 17, label: 'Science & Nature' }, { value: 18, label: 'Computers' }, { value: 19, label: 'Mathematics' }, { value: 20, label: 'Mythology' }, { value: 21, label: 'Sports' }, { value: 22, label: 'Geography' }, { value: 23, label: 'History' }, { value: 24, label: 'Politics' }, { value: 25, label: 'Art' }, { value: 26, label: 'Celebrities' }, { value: 27, label: 'Animals' }, { value: 28, label: 'Vehicles' }, { value: 29, label: 'Comics' }, { value: 30, label: 'Gadgets' }, { value: 31, label: 'Anime & Manga' }, { value: 32, label: 'Cartoon & Animations' }];
+var CategoriesArr = [{ value: '', label: 'All Categories' }, { value: 9, label: 'General Knowledge' }, { value: 10, label: 'Books' }, { value: 11, label: 'Film' }, { value: 12, label: 'Music' }, { value: 13, label: 'Musicals & Theaters' }, { value: 14, label: 'Television' }, { value: 15, label: 'Video Games' }, { value: 16, label: 'Board Games' }, { value: 17, label: 'Science & Nature' }, { value: 18, label: 'Computers' }, { value: 19, label: 'Mathematics' }, { value: 20, label: 'Mythology' }, { value: 21, label: 'Sports' }, { value: 22, label: 'Geography' }, { value: 23, label: 'History' }, { value: 24, label: 'Politics' }, { value: 25, label: 'Art' }, { value: 26, label: 'Celebrities' }, { value: 27, label: 'Animals' }, { value: 28, label: 'Vehicles' }, { value: 29, label: 'Comics' }, { value: 30, label: 'Gadgets' }, { value: 31, label: 'Anime & Manga' }, { value: 32, label: 'Cartoon & Animations' }];
 
 //9 = general knowledge, 10 = books, 11 = film, 12 = music, 13 = musicals & theaters
 // 14 = television, 15 = Video Games, 16 = board games, 17 = Science & Nature

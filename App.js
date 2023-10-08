@@ -26,7 +26,7 @@ export default function App() {
         setCheckAnswers(false);
         setQuizResults('');
 
-        fetch(`https://opentdb.com/api.php?amount=5${categoryValue = 1 ? '' : '&category=' + categoryValue}`)
+        fetch(`https://opentdb.com/api.php?amount=5${categoryValue ? '&category=' + categoryValue : ''}`)
             .then(res => res.json())
             .then(data => {
                 const newQuestionArr = data.results.map(item => {
@@ -63,7 +63,7 @@ export default function App() {
 
        return (
             <div className='option-container'>
-                <label for="select-category">Category:</label>
+                {/* <label for="select-category">Category:</label> */}
                 <select 
                     name="Category Options" 
                     id="select-category"

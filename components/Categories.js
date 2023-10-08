@@ -1,7 +1,7 @@
 import React from 'react'
 
 const CategoriesArr = [
-    { value: 1, label: 'All Categories' },
+    { value: '', label: 'All Categories' },
     { value: 9, label: 'General Knowledge' },
     { value: 10, label: 'Books' },
     { value: 11, label: 'Film' },
