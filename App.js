@@ -21,12 +21,12 @@ export default function App() {
     },[])
 
     function newQuiz(categoryValue) {
-
-        setQuizStarted(false);
-        setQuestionArr([]);
-        setCheckAnswers(false);
-        setQuizResults('');
-
+    
+        setQuizStarted(false)
+        setQuestionArr([])
+        setCheckAnswers(false)
+        setQuizResults('')
+   
         fetch(`https://opentdb.com/api.php?amount=5${categoryValue ? '&category=' + categoryValue : ''}`)
             .then(res => res.json())
             .then(data => {
@@ -213,7 +213,7 @@ export default function App() {
                             <button 
                                 className='btn-submit'
                                 style={{width: checkAnswers ? '125px' : '200px'}}
-                                onClick={checkAnswers ? newQuiz : handleCheckAnswers}
+                                onClick={checkAnswers ? () => newQuiz() : handleCheckAnswers}
                             >
                                 {checkAnswers ? 'Play Again' : 'Check Answers'}
                             </button> :

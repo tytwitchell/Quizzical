@@ -1,5 +1,3 @@
-import React from 'react'
-
 const CategoriesArr = [
     { value: '', label: 'All Categories' },
     { value: 9, label: 'General Knowledge' },
@@ -27,12 +25,6 @@ const CategoriesArr = [
     { value: 31, label: 'Anime & Manga' },
     { value: 32, label: 'Cartoon & Animations' },
 ];
-
-//9 = general knowledge, 10 = books, 11 = film, 12 = music, 13 = musicals & theaters
-// 14 = television, 15 = Video Games, 16 = board games, 17 = Science & Nature
-// 18 = Computers, 19 = Mathematics, 20 = Mythology, 21 = Sports, 22 = Geography
-// 23 = History, 24 = Politics, 25 = Art, 26 = Celebrities, 27 = Animals
-// 28 = vehicles, 29 = Comics, 30 = Gadgets, 31 = Anime & Manga, 32 = Cartoon & Animations
 
 
 export default  CategoriesArr
