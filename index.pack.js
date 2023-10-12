@@ -414,9 +414,9 @@ var _nanoid = __webpack_require__(15);
 
 var _htmlEntities = __webpack_require__(11);
 
-var _Categories = __webpack_require__(6);
+var _categories = __webpack_require__(6);
 
-var _Categories2 = _interopRequireDefault(_Categories);
+var _categories2 = _interopRequireDefault(_categories);
 
 var _Confetti = __webpack_require__(7);
 
@@ -427,7 +427,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 function App() {
-    var _React$useState = _react2.default.useState(_Categories2.default),
+    var _React$useState = _react2.default.useState(_categories2.default),
         _React$useState2 = _slicedToArray(_React$useState, 2),
         categories = _React$useState2[0],
         setCategories = _React$useState2[1];
@@ -608,7 +608,8 @@ function App() {
                         backgroundColor: btnBgColor(data, answer),
                         opacity: btnOpacity(data, answer),
                         border: btnBorder(data, answer)
-                    }
+                    },
+                    key: (0, _nanoid.nanoid)()
                 },
                 (0, _htmlEntities.decode)(answer)
             );
@@ -730,9 +731,9 @@ if (process.env.NODE_ENV === 'production') {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-var CategoriesArr = [{ value: '', label: 'All Categories' }, { value: 9, label: 'General Knowledge' }, { value: 10, label: 'Books' }, { value: 11, label: 'Film' }, { value: 12, label: 'Music' }, { value: 13, label: 'Musicals & Theaters' }, { value: 14, label: 'Television' }, { value: 15, label: 'Video Games' }, { value: 16, label: 'Board Games' }, { value: 17, label: 'Science & Nature' }, { value: 18, label: 'Computers' }, { value: 19, label: 'Mathematics' }, { value: 20, label: 'Mythology' }, { value: 21, label: 'Sports' }, { value: 22, label: 'Geography' }, { value: 23, label: 'History' }, { value: 24, label: 'Politics' }, { value: 25, label: 'Art' }, { value: 26, label: 'Celebrities' }, { value: 27, label: 'Animals' }, { value: 28, label: 'Vehicles' }, { value: 29, label: 'Comics' }, { value: 30, label: 'Gadgets' }, { value: 31, label: 'Anime & Manga' }, { value: 32, label: 'Cartoon & Animations' }];
+var categoriesArr = [{ value: '', label: 'All Categories' }, { value: 9, label: 'General Knowledge' }, { value: 10, label: 'Books' }, { value: 11, label: 'Film' }, { value: 12, label: 'Music' }, { value: 13, label: 'Musicals & Theaters' }, { value: 14, label: 'Television' }, { value: 15, label: 'Video Games' }, { value: 16, label: 'Board Games' }, { value: 17, label: 'Science & Nature' }, { value: 18, label: 'Computers' }, { value: 19, label: 'Mathematics' }, { value: 20, label: 'Mythology' }, { value: 21, label: 'Sports' }, { value: 22, label: 'Geography' }, { value: 23, label: 'History' }, { value: 24, label: 'Politics' }, { value: 25, label: 'Art' }, { value: 26, label: 'Celebrities' }, { value: 27, label: 'Animals' }, { value: 28, label: 'Vehicles' }, { value: 29, label: 'Comics' }, { value: 30, label: 'Gadgets' }, { value: 31, label: 'Anime & Manga' }, { value: 32, label: 'Cartoon & Animations' }];
 
-exports.default = CategoriesArr;
+exports.default = categoriesArr;
 
 /***/ }),
 /* 7 */

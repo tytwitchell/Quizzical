@@ -3,13 +3,13 @@ import IntroPg from './components/IntroPg'
 import Questions from './components/Questions'
 import { nanoid } from 'nanoid'
 import { decode } from 'html-entities'
-import CategoriesArr from './components/Categories';
+import categoriesArr from './categories';
 import ReactConfetti from './components/Confetti';
 
 
 export default function App() {
     
-    const [categories, setCategories] = React.useState(CategoriesArr)
+    const [categories, setCategories] = React.useState(categoriesArr)
     const [quizStarted, setQuizStarted] = React.useState(false)
     const [questionArr, setQuestionArr] = React.useState([])
     const [checkAnswers, setCheckAnswers] = React.useState(false)
@@ -171,6 +171,7 @@ export default function App() {
                         border: btnBorder(data, answer)
                     }
                 }
+                key={nanoid()}
             >
                 {decode(answer)}
             </button>

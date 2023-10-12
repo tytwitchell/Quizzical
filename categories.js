@@ -1,4 +1,4 @@
-const CategoriesArr = [
+const categoriesArr = [
     { value: '', label: 'All Categories' },
     { value: 9, label: 'General Knowledge' },
     { value: 10, label: 'Books' },
@@ -27,4 +27,4 @@ const CategoriesArr = [
 ];
 
 
-export default  CategoriesArr
+export default  categoriesArr
