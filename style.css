@@ -50,13 +50,6 @@ main {
     
 }
 
-.option-container > label {
-    font-size: .8em;
-    margin-right: .5em;
-    padding-bottom: 3px;
-    
-}
-
 .option-container > select {
     border: none;
     outline: none;

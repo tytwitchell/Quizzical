@@ -1,4 +1,5 @@
 const categoriesArr = [
+
     { value: '', label: 'All Categories' },
     { value: 9, label: 'General Knowledge' },
     { value: 10, label: 'Books' },
@@ -25,6 +26,5 @@ const categoriesArr = [
     { value: 31, label: 'Anime & Manga' },
     { value: 32, label: 'Cartoon & Animations' },
 ];
-
 
 export default  categoriesArr

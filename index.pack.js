@@ -412,8 +412,6 @@ var _Questions2 = _interopRequireDefault(_Questions);
 
 var _nanoid = __webpack_require__(15);
 
-var _htmlEntities = __webpack_require__(11);
-
 var _categories = __webpack_require__(6);
 
 var _categories2 = _interopRequireDefault(_categories);
@@ -427,37 +425,36 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 function App() {
-    var _React$useState = _react2.default.useState(_categories2.default),
-        _React$useState2 = _slicedToArray(_React$useState, 2),
-        categories = _React$useState2[0],
-        setCategories = _React$useState2[1];
+    var _useState = (0, _react.useState)(_categories2.default),
+        _useState2 = _slicedToArray(_useState, 2),
+        categories = _useState2[0],
+        setCategories = _useState2[1];
 
-    var _React$useState3 = _react2.default.useState(false),
-        _React$useState4 = _slicedToArray(_React$useState3, 2),
-        quizStarted = _React$useState4[0],
-        setQuizStarted = _React$useState4[1];
+    var _useState3 = (0, _react.useState)(false),
+        _useState4 = _slicedToArray(_useState3, 2),
+        quizStarted = _useState4[0],
+        setQuizStarted = _useState4[1];
 
-    var _React$useState5 = _react2.default.useState([]),
-        _React$useState6 = _slicedToArray(_React$useState5, 2),
-        questionArr = _React$useState6[0],
-        setQuestionArr = _React$useState6[1];
+    var _useState5 = (0, _react.useState)([]),
+        _useState6 = _slicedToArray(_useState5, 2),
+        questionArr = _useState6[0],
+        setQuestionArr = _useState6[1];
 
-    var _React$useState7 = _react2.default.useState(false),
-        _React$useState8 = _slicedToArray(_React$useState7, 2),
-        checkAnswers = _React$useState8[0],
-        setCheckAnswers = _React$useState8[1];
+    var _useState7 = (0, _react.useState)(false),
+        _useState8 = _slicedToArray(_useState7, 2),
+        checkAnswers = _useState8[0],
+        setCheckAnswers = _useState8[1];
 
-    var _React$useState9 = _react2.default.useState(''),
-        _React$useState10 = _slicedToArray(_React$useState9, 2),
-        quizResults = _React$useState10[0],
-        setQuizResults = _React$useState10[1];
+    var _useState9 = (0, _react.useState)(''),
+        _useState10 = _slicedToArray(_useState9, 2),
+        quizResults = _useState10[0],
+        setQuizResults = _useState10[1];
 
     (0, _react.useEffect)(function () {
         newQuiz();
     }, []);
 
     function newQuiz(categoryValue) {
-
         setQuizStarted(false);
         setQuestionArr([]);
         setCheckAnswers(false);
@@ -491,11 +488,12 @@ function App() {
     }
 
     function dropDownHtml() {
+
         var options = categories.map(function (category) {
             return _react2.default.createElement(
                 'option',
                 { key: category.value, value: category.value },
-                category.label || 'All Categories'
+                category.label
             );
         });
 
@@ -538,13 +536,12 @@ function App() {
     }
 
     function handleCheckAnswers() {
-        setCheckAnswers(function (prevCheckAnswers) {
-            return !prevCheckAnswers;
-        });
         var correctAns = questionArr.filter(function (q) {
             return q.clickedAnswer === q.correct;
         });
-
+        setCheckAnswers(function (prevCheckAnswers) {
+            return !prevCheckAnswers;
+        });
         setQuizResults(correctAns.length);
     }
 
@@ -595,43 +592,6 @@ function App() {
         return array;
     }
 
-    var questions = questionArr.map(function (data) {
-        var answerBtns = data.allAnswers.map(function (answer) {
-            return _react2.default.createElement(
-                'button',
-                {
-                    className: 'btn-answer',
-                    onClick: function onClick() {
-                        return checkAnswers ? '' : handleAnsClick(data.id, answer);
-                    },
-                    style: {
-                        backgroundColor: btnBgColor(data, answer),
-                        opacity: btnOpacity(data, answer),
-                        border: btnBorder(data, answer)
-                    },
-                    key: (0, _nanoid.nanoid)()
-                },
-                (0, _htmlEntities.decode)(answer)
-            );
-        });
-
-        return _react2.default.createElement(
-            'div',
-            { key: data.id },
-            _react2.default.createElement(
-                'h4',
-                { className: 'question' },
-                (0, _htmlEntities.decode)(data.question)
-            ),
-            _react2.default.createElement(
-                'div',
-                { className: 'answer-container' },
-                answerBtns
-            ),
-            _react2.default.createElement('hr', null)
-        );
-    });
-
     return _react2.default.createElement(
         'main',
         null,
@@ -645,7 +605,15 @@ function App() {
         _react2.default.createElement(
             'div',
             { className: 'content-container' },
-            quizStarted ? _react2.default.createElement(_Questions2.default, { questionHtml: questions }) : _react2.default.createElement(_IntroPg2.default, {
+            quizStarted ? _react2.default.createElement(_Questions2.default, {
+                questionArr: questionArr,
+                checkAnswers: checkAnswers,
+                handleAnsClick: handleAnsClick,
+                btnBgColor: btnBgColor,
+                btnOpacity: btnOpacity,
+                btnBorder: btnBorder,
+                nanoid: _nanoid.nanoid
+            }) : _react2.default.createElement(_IntroPg2.default, {
                 dropDownHtml: dropDownHtml(),
                 onClick: handleStartBtn
             }),
@@ -824,13 +792,61 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _htmlEntities = __webpack_require__(11);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function Questions(props) {
+function Questions(_ref) {
+    var questionArr = _ref.questionArr,
+        checkAnswers = _ref.checkAnswers,
+        handleAnsClick = _ref.handleAnsClick,
+        btnBgColor = _ref.btnBgColor,
+        btnOpacity = _ref.btnOpacity,
+        btnBorder = _ref.btnBorder,
+        nanoid = _ref.nanoid;
+
+
+    var questions = questionArr.map(function (data) {
+        var answerBtns = data.allAnswers.map(function (answer) {
+            return _react2.default.createElement(
+                'button',
+                {
+                    className: 'btn-answer',
+                    onClick: function onClick() {
+                        return checkAnswers ? '' : handleAnsClick(data.id, answer);
+                    },
+                    style: {
+                        backgroundColor: btnBgColor(data, answer),
+                        opacity: btnOpacity(data, answer),
+                        border: btnBorder(data, answer)
+                    },
+                    key: nanoid()
+                },
+                (0, _htmlEntities.decode)(answer)
+            );
+        });
+
+        return _react2.default.createElement(
+            'div',
+            { key: data.id },
+            _react2.default.createElement(
+                'h4',
+                { className: 'question' },
+                (0, _htmlEntities.decode)(data.question)
+            ),
+            _react2.default.createElement(
+                'div',
+                { className: 'answer-container' },
+                answerBtns
+            ),
+            _react2.default.createElement('hr', null)
+        );
+    });
+
     return _react2.default.createElement(
         'div',
         { className: 'question-container' },
-        props.questionHtml
+        questions
     );
 }
 
@@ -855,7 +871,11 @@ var _App2 = _interopRequireDefault(_App);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_reactDom2.default.render(_react2.default.createElement(_App2.default, null), document.getElementById("root"));
+_reactDom2.default.render(_react2.default.createElement(
+  _react.StrictMode,
+  null,
+  _react2.default.createElement(_App2.default, null)
+), document.getElementById("root"));
 
 /***/ }),
 /* 11 */

@@ -2,31 +2,29 @@ import React, { useState, useEffect } from 'react';
 import IntroPg from './components/IntroPg'
 import Questions from './components/Questions'
 import { nanoid } from 'nanoid'
-import { decode } from 'html-entities'
-import categoriesArr from './categories';
-import ReactConfetti from './components/Confetti';
-
+import categoriesArr from './categories'
+import ReactConfetti from './components/Confetti'
 
 export default function App() {
     
-    const [categories, setCategories] = React.useState(categoriesArr)
-    const [quizStarted, setQuizStarted] = React.useState(false)
-    const [questionArr, setQuestionArr] = React.useState([])
-    const [checkAnswers, setCheckAnswers] = React.useState(false)
-    const [quizResults, setQuizResults] = React.useState('')
+    const [categories, setCategories] = useState(categoriesArr)
+    const [quizStarted, setQuizStarted] = useState(false)
+    const [questionArr, setQuestionArr] = useState([])
+    const [checkAnswers, setCheckAnswers] = useState(false)
+    const [quizResults, setQuizResults] = useState('')
 
 
     useEffect(() => {
         newQuiz()
     },[])
 
+
     function newQuiz(categoryValue) {
-    
-        setQuizStarted(false)
-        setQuestionArr([])
-        setCheckAnswers(false)
-        setQuizResults('')
-   
+        setQuizStarted(false);
+        setQuestionArr([]);
+        setCheckAnswers(false);
+        setQuizResults('');
+
         fetch(`https://opentdb.com/api.php?amount=5${categoryValue ? '&category=' + categoryValue : ''}`)
             .then(res => res.json())
             .then(data => {
@@ -55,16 +53,16 @@ export default function App() {
     }
 
     function dropDownHtml() {
+    
         const options = categories.map(category => (
                 <option key={category.value} value={category.value}>
-                    {category.label || 'All Categories'}
+                    {category.label}
                 </option>
             )
         )
 
        return (
             <div className='option-container'>
-                {/* <label for="select-category">Category:</label> */}
                 <select 
                     name="Category Options" 
                     id="select-category"
@@ -101,9 +99,8 @@ export default function App() {
     }
 
     function handleCheckAnswers() {
-        setCheckAnswers(prevCheckAnswers => !prevCheckAnswers)
         const correctAns = questionArr.filter( q => q.clickedAnswer === q.correct )
-
+        setCheckAnswers(prevCheckAnswers => !prevCheckAnswers)
         setQuizResults(correctAns.length) 
     }
 
@@ -159,35 +156,6 @@ export default function App() {
         return array;
       }
 
-    const questions = questionArr.map(data => {
-        const answerBtns = data.allAnswers.map(answer => (
-            <button 
-                className="btn-answer" 
-                onClick={() => checkAnswers ? '' : handleAnsClick(data.id, answer)}
-                style={
-                    {
-                        backgroundColor: btnBgColor(data, answer),
-                        opacity: btnOpacity(data, answer),
-                        border: btnBorder(data, answer)
-                    }
-                }
-                key={nanoid()}
-            >
-                {decode(answer)}
-            </button>
-        ))
-
-        return (
-            <div key={data.id}>
-                <h4 className="question">{decode(data.question)}</h4>
-                <div className="answer-container">
-                    {answerBtns}
-                </div>
-                <hr></hr>
-            </div>
-        )
-    })
-
     return (
         <main>
             {quizResults > 3 && <ReactConfetti />}
@@ -200,7 +168,15 @@ export default function App() {
             <div className="content-container">
                 {
                     quizStarted ? 
-                        <Questions questionHtml={questions}/> : 
+                        <Questions 
+                            questionArr={questionArr}
+                            checkAnswers={checkAnswers}
+                            handleAnsClick={handleAnsClick}
+                            btnBgColor={btnBgColor}
+                            btnOpacity={btnOpacity}
+                            btnBorder={btnBorder}
+                            nanoid={nanoid}
+                        /> : 
                         <IntroPg 
                             dropDownHtml={dropDownHtml()}
                             onClick={handleStartBtn}
