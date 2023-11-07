@@ -460,7 +460,7 @@ function App() {
         setCheckAnswers(false);
         setQuizResults('');
 
-        fetch('https://opentdb.com/api.php?amount=5' + (categoryValue ? '&category=' + categoryValue : '')).then(function (res) {
+        fetch('https://opentdb.com/api.php?amount=5&difficulty=easy' + (categoryValue ? "&category=" + categoryValue : "")).then(function (res) {
             return res.json();
         }).then(function (data) {
             var newQuestionArr = data.results.map(function (item) {
@@ -474,7 +474,7 @@ function App() {
                     correct: correctAnswer,
                     incorrect: incorrectAnswersArr,
                     allAnswers: shuffledAnswers,
-                    clickedAnswer: '',
+                    clickedAnswer: "",
                     id: (0, _nanoid.nanoid)()
                 };
             });

@@ -25,27 +25,31 @@ export default function App() {
         setCheckAnswers(false);
         setQuizResults('');
 
-        fetch(`https://opentdb.com/api.php?amount=5${categoryValue ? '&category=' + categoryValue : ''}`)
-            .then(res => res.json())
-            .then(data => {
-                const newQuestionArr = data.results.map(item => {
-                    const incorrectAnswersArr = [...item.incorrect_answers]
-                    const correctAnswer = item.correct_answer
-                    const allAnswersArr = [...incorrectAnswersArr, correctAnswer]
-                    const shuffledAnswers = shuffleArray(allAnswersArr)
-                
-                    return {
-                        question: item.question,
-                        correct: correctAnswer,
-                        incorrect: incorrectAnswersArr,
-                        allAnswers: shuffledAnswers,
-                        clickedAnswer: '',
-                        id: nanoid()
-                    }
-                })
+        fetch(
+          `https://opentdb.com/api.php?amount=5&difficulty=easy${
+            categoryValue ? "&category=" + categoryValue : ""
+          }`
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            const newQuestionArr = data.results.map((item) => {
+              const incorrectAnswersArr = [...item.incorrect_answers];
+              const correctAnswer = item.correct_answer;
+              const allAnswersArr = [...incorrectAnswersArr, correctAnswer];
+              const shuffledAnswers = shuffleArray(allAnswersArr);
 
-                setQuestionArr(newQuestionArr)
-        })
+              return {
+                question: item.question,
+                correct: correctAnswer,
+                incorrect: incorrectAnswersArr,
+                allAnswers: shuffledAnswers,
+                clickedAnswer: "",
+                id: nanoid(),
+              };
+            });
+
+            setQuestionArr(newQuestionArr);
+          });
     }
 
     function handleCategoryChange(event) {
