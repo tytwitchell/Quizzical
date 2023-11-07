@@ -53,14 +53,14 @@ main {
 .option-container > select {
     border: none;
     outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     font-size: .8em;
     padding: .5em 1em;
     border-radius: 5px;
     background-color:#DBDEF0;
     cursor: pointer;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
     background-image: url(images/Orion_navigation-down\ \(1\).png);
     background-repeat: no-repeat;
     background-size: 20px;
